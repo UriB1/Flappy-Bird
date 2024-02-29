@@ -8,7 +8,8 @@ Java Development Kit (JDK) installed on your machine.
 
 ### Setup
 1. Clone or download the repository.
-2. Compile and run the FlappyBird.java file using your preferred Java development environment or command line.
+2. Replace paths to all images and icons within the code with your saved images paths on your local device.
+3. Compile and run the FlappyBird.java file using your preferred Java development environment.
 
 ## Features
 * Single-player and Multiplayer Modes: Choose between playing alone or challenging a friend in a two-player mode.
@@ -38,4 +39,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 Feel free to contribute by opening issues or creating pull requests.
 
 ## Author
-[UriB1]
+[UriB1](https://github.com/UriB1)

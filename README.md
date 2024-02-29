@@ -20,13 +20,13 @@ Java Development Kit (JDK) installed on your machine.
 ** Mouse Click: Jump the bird.
 
 * Multiplayer Mode:
-** Player 1:
-*** Mouse Click: Jump the red bird.
-** Player 2:
-*** Spacebar: Jump the yellow bird.
+  * Player 1:
+    * Mouse Click: Jump the red bird.
+  * Player 2:
+    * Spacebar: Jump the yellow bird.
 
 * Pause/Resume:
-** Esc Key: Pause or resume the game.
+  * Esc Key: Pause or resume the game.
 
 ## Acknowledgments
 The game assets used in this project are sourced from a variety of websites that allows free use of images and icons.

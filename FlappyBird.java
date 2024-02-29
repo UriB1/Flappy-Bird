@@ -1,3 +1,4 @@
+// Import statements for required libraries
 package flappyBird;
 
 import javax.imageio.ImageIO;
@@ -10,9 +11,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+// Main class representing the Flappy Bird game
 class FlappyBird implements ActionListener, MouseListener, KeyListener {
     static FlappyBird flappyBird;
-    final int WIDTH = 1200, HEIGHT = 800;
+    
+    // Game window dimensions
+    final int WIDTH = 1200, HEIGHT = 800; 
+    
+    // Game variables    
     int ticks1, ticks2, yMotionP1, yMotionP2, player1score, player2score, bestScore, distance = 600, speed = 10;
     JFrame jFrame = new JFrame();
     JButton startButton, replayButton, mainMenuButton, singlePlayerButton, multiPlayerButton;
@@ -22,44 +28,55 @@ class FlappyBird implements ActionListener, MouseListener, KeyListener {
     Boolean gameOver = false, gameStarted = false, paused = false, multiplayer = false, p1Died = false, p2Died = false;
     ArrayList<Rectangle> columns = new ArrayList<>();
     ArrayList<ImageIcon> pipes = new ArrayList<>();
-    ImageIcon redBirdIcon = new ImageIcon("C://Users//Uri Beeri//Code Projects//Flappy Bird//Flappy Bird//src//flappyBird//redBird.png"),
-           yellowBirdIcon = new ImageIcon("C://Users//Uri Beeri//Code Projects//Flappy Bird//Flappy Bird//src//flappyBird//yellowBird.png"),
-           gameOverIcon = new ImageIcon("C://Users//Uri Beeri//Code Projects//Flappy Bird//Flappy Bird//src//flappyBird//gameOver3.png"),
-           headLine = new ImageIcon("C://Users//Uri Beeri//Code Projects//Flappy Bird//Flappy Bird//src//flappyBird//headLine.png"),
-           startButtonIcon = new ImageIcon("C://Users//Uri Beeri//Code Projects//Flappy Bird//Flappy Bird//src//flappyBird//startButton.png"),
-           singlePButtonIcon = new ImageIcon("C://Users//Uri Beeri//Code Projects//Flappy Bird//Flappy Bird//src//flappyBird//singlePlayer.png"),
-           multiPButtonIcon = new ImageIcon("C://Users//Uri Beeri//Code Projects//Flappy Bird//Flappy Bird//src//flappyBird//multiPlayer.png"),
-           pausedIcon = new ImageIcon("C://Users//Uri Beeri//Code Projects//Flappy Bird//Flappy Bird//src//flappyBird//paused.png"),
-           backgroundImg = new ImageIcon("C://Users//Uri Beeri//Code Projects//Flappy Bird//Flappy Bird//src//flappyBird//background2.jpg");
+
+    // Image icons for various game elements    
+    // Replace paths to your saved images paths on your local device
+    ImageIcon redBirdIcon = new ImageIcon("path_to_redBird.png"),
+           yellowBirdIcon = new ImageIcon("path_to_yellowBird.png"),
+           gameOverIcon = new ImageIcon("path_to_gameOver3.png"),
+           headLine = new ImageIcon("path_to_headLine.png"),
+           startButtonIcon = new ImageIcon("path_to_startButton.png"),
+           singlePButtonIcon = new ImageIcon("path_to_singlePlayer.png"),
+           multiPButtonIcon = new ImageIcon("path_to_multiPlayer.png"),
+           pausedIcon = new ImageIcon("path_to_paused.png"),
+           backgroundImg = new ImageIcon("path_to_background2.jpg");
+
+    // BufferedImages for pipe images    
     BufferedImage buffImage, buffImage2;
     {
-        try {
-            buffImage = ImageIO.read(new File("C://Users//Uri Beeri//Code Projects//Flappy Bird//Flappy Bird//src//flappyBird//pipe.png"));
-            buffImage2 = ImageIO.read(new File("C://Users//Uri Beeri//Code Projects//Flappy Bird//Flappy Bird//src//flappyBird//skyPipe.png"));
+        try { // Replace paths to the saved images on your local device
+            buffImage = ImageIO.read(new File("path_to_pipe.png"));
+            buffImage2 = ImageIO.read(new File("path_to_skyPipe.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+    // Main method to start the game
     public static void main (String[] args) {flappyBird = new FlappyBird();}
-
+    
+    // Constructor for FlappyBird class
     FlappyBird() {
+        // Initialize game components        
         startButton = new JButton(startButtonIcon);
         startButton.setBounds(500, 480, 183, 79);
         startButton.setBackground(Color.BLACK);
         startButton.setBorder(BorderFactory.createEtchedBorder());
         startButton.addActionListener(this);
 
+        // Initialize single-player components
         singlePlayerButton = new JButton(singlePButtonIcon);
         singlePlayerButton.setBounds(350, 489, 233, 60);
         singlePlayerButton.setVisible(false);
         singlePlayerButton.addActionListener(this);
 
+        // Initialize multi-player components
         multiPlayerButton = new JButton(multiPButtonIcon);
         multiPlayerButton.setBounds(617, 489, 233, 60);
         multiPlayerButton.setVisible(false);
         multiPlayerButton.addActionListener(this);
 
+        // Initialize replay button components
         replayButton = new JButton();
         replayButton.setBounds(535, 540, 50, 50);
         replayButton.setOpaque(false);
@@ -68,6 +85,7 @@ class FlappyBird implements ActionListener, MouseListener, KeyListener {
         replayButton.setFocusPainted(false);
         replayButton.addActionListener(this);
 
+        // Initialize main-menu button components
         mainMenuButton = new JButton();
         mainMenuButton.setBounds(620, 540, 50, 50);
         mainMenuButton.setOpaque(false);
@@ -76,6 +94,7 @@ class FlappyBird implements ActionListener, MouseListener, KeyListener {
         mainMenuButton.setFocusPainted(false);
         mainMenuButton.addActionListener(this);
 
+        // Set up the game window
         renderer = new Renderer();
         rand = new Random();
         Timer timer = new Timer(20, this);
@@ -94,6 +113,7 @@ class FlappyBird implements ActionListener, MouseListener, KeyListener {
         jFrame.setResizable(false);
         jFrame.setVisible(true);
 
+        // Initialize bird and pipes
         bird1 = new Rectangle(WIDTH / 2 - 40, HEIGHT / 2 - 10, redBirdIcon.getIconWidth() - 27, redBirdIcon.getIconHeight() - 25);
         bird2 = new Rectangle(WIDTH / 2 - 120, HEIGHT / 2 - 3, yellowBirdIcon.getIconWidth() - 27, yellowBirdIcon.getIconHeight() - 25);
 
@@ -102,9 +122,11 @@ class FlappyBird implements ActionListener, MouseListener, KeyListener {
         addPipe(true);
         addPipe(true);
 
+        // Start game timer
         timer.start();
     }
 
+    // Method to add a pipe to the game
     void addPipe(Boolean start) {
         int space = 300;
         int width = 100;
@@ -132,10 +154,12 @@ class FlappyBird implements ActionListener, MouseListener, KeyListener {
         }
     }
 
+    // Method to paint a pipe on the game window
     void paintPipe(Graphics g, Rectangle column, ImageIcon pipe) {
         g.drawImage(pipe.getImage(), column.x, column.y, null);
     }
 
+    // Method to handle jump for player 1
     void jumpP1() {
         if(gameOver) {
             if (!multiplayer)
@@ -171,6 +195,7 @@ class FlappyBird implements ActionListener, MouseListener, KeyListener {
         }
     }
 
+    // Method to handle jump for player 2
     void jumpP2 () {
         if (!paused) {
             if(yMotionP2 > 0)
@@ -179,6 +204,7 @@ class FlappyBird implements ActionListener, MouseListener, KeyListener {
         }
     }
 
+    // ActionListener method for handling game events
     @Override
     public void actionPerformed(ActionEvent e) {
         ticks1++;
@@ -249,6 +275,7 @@ class FlappyBird implements ActionListener, MouseListener, KeyListener {
         }
     }
 
+    // Method to handle bird interactions with pipes
     void birdSituations(Rectangle bird, int i) {
         for (Rectangle column : columns) {
             if (bird.x == column.x + column.width && !gameOver && column.y == 0) {
@@ -285,6 +312,7 @@ class FlappyBird implements ActionListener, MouseListener, KeyListener {
             bird.y = HEIGHT - 75 - bird.height;
     }
 
+    // Method to determine if the game has ended
     void isGameEnded(int i) {
         if (!multiplayer)
             gameOver = true;
@@ -298,6 +326,7 @@ class FlappyBird implements ActionListener, MouseListener, KeyListener {
         }
     }
 
+    // Method to repaint the game window
     void repaint(Graphics g) {
         g.drawImage(backgroundImg.getImage(), 0, 0, WIDTH, HEIGHT, null);
         g.drawImage(redBirdIcon.getImage(), bird1.x, bird1.y, null); //**
@@ -330,11 +359,14 @@ class FlappyBird implements ActionListener, MouseListener, KeyListener {
         }
     }
 
+    // MouseListener method triggered when a mouse button is pressed
     @Override
     public void mousePressed(MouseEvent e) {
         if (gameStarted && !gameOver && !p1Died)
             jumpP1();
     }
+
+    // KeyListener method triggered when a key is pressed
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_SPACE && gameStarted && !gameOver) {
@@ -346,6 +378,8 @@ class FlappyBird implements ActionListener, MouseListener, KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE && gameStarted && !gameOver)
             paused = !paused;
     }
+
+    // Unused MouseListener methods
     @Override
     public void mouseClicked(MouseEvent e) {}
     @Override
@@ -354,6 +388,8 @@ class FlappyBird implements ActionListener, MouseListener, KeyListener {
     public void mouseEntered(MouseEvent e) {}
     @Override
     public void mouseExited(MouseEvent e) {}
+
+    // Unused KeyListener methods
     @Override
     public void keyReleased(KeyEvent e) {}
     @Override

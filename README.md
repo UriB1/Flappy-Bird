@@ -32,7 +32,10 @@ Java Development Kit (JDK) installed on your machine.
 The game assets used in this project are sourced from a variety of websites that allows free use of images and icons.
 
 ## License
-This project is licensed under the MIT License - see the LICENSE.md file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Contributing
 Feel free to contribute by opening issues or creating pull requests.
+
+## Author
+[UriB1]

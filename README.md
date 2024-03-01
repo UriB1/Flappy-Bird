@@ -40,3 +40,12 @@ Feel free to contribute by opening issues or creating pull requests.
 
 ## Author
 [UriB1](https://github.com/UriB1)
+
+## Screenshots
+![image](https://github.com/UriB1/Flappy-Bird-/assets/106737885/812857a3-2773-4e17-8931-1e52f14035e5)
+
+![image](https://github.com/UriB1/Flappy-Bird-/assets/106737885/07f9a109-6a6c-4a1a-a1f0-cafda0a96b33)
+
+![image](https://github.com/UriB1/Flappy-Bird-/assets/106737885/e3e2bcc8-0749-400e-b477-b29db0f96cc2)
+
+![image](https://github.com/UriB1/Flappy-Bird-/assets/106737885/735c8755-a4e1-4090-9c48-91f2ad56edd0)
